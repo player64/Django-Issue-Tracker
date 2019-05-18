@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block page_title %}
+    Login
+{% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    {% crispy login_form %}
+    <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+{% endblock %}

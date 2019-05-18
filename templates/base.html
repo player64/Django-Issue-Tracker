@@ -1,0 +1,18 @@
+{% load render_bundle from webpack_loader %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Issue tracker - home automation</title>
+    {% render_bundle 'app' 'css' %}
+    <link type="text/css" href="{% static 'css/app.e36d7819.css' %}" rel="stylesheet">
+</head>
+<body>
+<h1>{% block page_title %}{% endblock %}</h1>
+{% block content %}
+{% endblock %}
+{% render_bundle 'app' 'js' %}
+</body>
+</html>
