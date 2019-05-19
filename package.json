@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Webpack for assets files",
   "scripts": {
-    "build": "webpack --config static/assets/webpack/webpack.config.prod.js  --colors",
-    "start": "webpack --watch --config static/assets/webpack/webpack.config.dev.js"
+    "build": "webpack --config assets/webpack/webpack.config.prod.js  --colors",
+    "start": "webpack --watch --config assets/webpack/webpack.config.dev.js"
   },
   "author": "mariusz <mariusz@threesixty.ie>",
   "license": "MIT",
@@ -41,6 +41,7 @@
     "@babel/polyfill": "^7.0.0",
     "bootstrap": "^4.3.1",
     "core-js": "^3.0.1",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.4.0"
   }
 }

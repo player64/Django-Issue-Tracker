@@ -122,15 +122,17 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATICFILES_LOCATION = 'static'
-STATIC_URL = '/staticfiles/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_LOCATION = 'compiled-static'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'compiled-static'),
 ]
 
-
-WEBPACK_COMPILED_ASSETS = os.path.join(BASE_DIR, 'static', 'webpack-bundle')
+WEBPACK_STATIC_URL = '/compiled-static/'
+WEBPACK_COMPILED_ASSETS = os.path.join(BASE_DIR, 'compiled-static', 'webpack-bundle')
 
 # python manage.py collectstatic
 # https://stackoverflow.com/questions/24022558/differences-between-staticfiles-dir-static-root-and-media-root
@@ -139,7 +141,7 @@ WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
         'BUNDLE_DIR_NAME': 'webpack-bundle/',
-        'STATS_FILE': os.path.join(settings.BASE_DIR, 'static', 'webpack-stats-json'),
+        'STATS_FILE': os.path.join(settings.BASE_DIR, 'assets', 'webpack-stats-json'),
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
@@ -150,3 +152,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -10,17 +10,19 @@ def logout(request):
     """A view that logs the user out and redirects back to the index page"""
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
-    return redirect(reverse('index'))
+    return redirect(reverse('login'))
 
 
 def login(request):
+    """If authenticated redirect to index"""
+    if request.user.is_authenticated:
+        return redirect(reverse('index'))
     """A view that manages the login form"""
     if request.method == 'POST':
         login_form = UserLoginForm(request.POST)
         if login_form.is_valid():
             user = auth.authenticate(request.POST['email'],
                                      password=request.POST['password'])
-
             if user:
                 auth.login(request, user)
                 messages.error(request, "You have successfully logged in")
@@ -44,11 +46,14 @@ def profile(request):
 
 
 def register(request):
+    """If authenticated redirect to index"""
+    if request.user.is_authenticated:
+        return redirect(reverse('index'))
     """A view that manages the registration form"""
     if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            user_form.save()
+        registration_form = UserRegistrationForm(request.POST)
+        if registration_form.is_valid():
+            registration_form.save()
 
             user = auth.authenticate(request.POST.get('email'),
                                      password=request.POST.get('password1'))
@@ -61,7 +66,6 @@ def register(request):
             else:
                 messages.error(request, 'Unable to log you in at this time!')
     else:
-        user_form = UserRegistrationForm()
+        registration_form = UserRegistrationForm()
 
-    args = {'user_form': user_form}
-    return render(request, 'register.html', args)
+    return render(request, 'register.html', {'registration_form': registration_form})
