@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
     url(r'^compiled-static/webpack-bundle/(?P<path>.*)$', static.serve, {'document_root': WEBPACK_COMPILED_ASSETS}),
-    url(r'^', include(pages_urls), name='index'),
+    url(r'^', include(pages_urls), name='pages'),
     url(r'^accounts/', include(urls_accounts)),
 ]

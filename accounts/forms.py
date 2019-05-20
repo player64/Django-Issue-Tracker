@@ -9,7 +9,7 @@ from crispy_forms.layout import Submit
 
 
 class UserLoginForm(forms.Form):
-    email = forms.CharField()
+    email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
 
     def __init__(self, *args, **kwargs):
@@ -33,8 +33,9 @@ class UserRegistrationForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        username = self.cleaned_data.get('username')
-        if User.objects.filter(email=email).exclude(username=username):
+        # username = self.cleaned_data.get('username')
+        # .exclude(username)
+        if User.objects.filter(email=email):
             raise forms.ValidationError(u'Email addresses is already registered.')
         return email
 

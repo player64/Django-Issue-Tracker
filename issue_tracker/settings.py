@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpack_loader',
+    'filters.startswith',
     'crispy_forms',
     'accounts',
-    'pages'
+    'pages',
+    'bugs'
 ]
 
 MIDDLEWARE = [
