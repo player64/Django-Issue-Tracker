@@ -15,6 +15,7 @@ class Bugs(models.Model):
     description = models.TextField()
     status = models.CharField(max_length=5, choices=choices, default="todo")
     votes = models.IntegerField(default=0)
+    voted_by = models.ManyToManyField(User, related_name='voted_by')
     views = models.IntegerField(default=0)
     author = models.ForeignKey(User, related_name='created_by')
 
