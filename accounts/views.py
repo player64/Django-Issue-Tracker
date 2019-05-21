@@ -29,7 +29,7 @@ def login(request):
                 if request.GET and request.GET['next'] != '':
                     return HttpResponseRedirect(request.GET['next'])
                 else:
-                    return redirect(reverse('index'))
+                    return redirect(reverse('profile'))
             else:
                 login_form.add_error(None, 'Entered credentials seems to be invalid')
     else:
