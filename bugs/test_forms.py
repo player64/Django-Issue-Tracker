@@ -30,12 +30,12 @@ class TestUserForms(TestCase):
 
     def test_bug_comment_form_correct(self):
         form = BugCommentForm({
-            'bug_comment': 'This is a comment'
+            'comment': 'This is a comment'
         })
         self.assertTrue(form.is_valid())
 
     def test_bug_comment_form_empty_comment(self):
         form = BugCommentForm({
-            'bug_comment': ''
+            'comment': ''
         })
         self.assertFalse(form.is_valid())

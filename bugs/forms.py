@@ -13,8 +13,8 @@ class BugForm(forms.ModelForm):
 
 
 class BugCommentForm(forms.ModelForm):
-    bug_comment = forms.CharField(widget=forms.Textarea)
+    comment = forms.CharField(widget=forms.Textarea)
 
     class Meta:
         model = BugComment
-        fields = ['bug_comment']
+        fields = ['comment']
