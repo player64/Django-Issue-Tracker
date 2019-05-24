@@ -4,7 +4,7 @@ from django.utils.timezone import localtime
 # Create your models here.
 
 
-class Bugs(models.Model):
+class Features(models.Model):
 
     choices = (
         ('todo', 'To do'),
@@ -15,7 +15,8 @@ class Bugs(models.Model):
     name = models.CharField(max_length=256)
     description = models.TextField()
     status = models.CharField(max_length=5, choices=choices, default="todo")
-    voted_by = models.ManyToManyField(User, blank=True, related_name='voted_by')
+    voted_by = models.ManyToManyField(User, blank=True, related_name='paid_by')
+    paid_no = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     author = models.ForeignKey(User)
     published = models.DateField(default=localtime, editable=False)
@@ -24,9 +25,9 @@ class Bugs(models.Model):
         return self.name
 
 
-class BugComment(models.Model):
+class FeatureComment(models.Model):
     comment = models.TextField()
-    bug = models.ForeignKey(Bugs)
+    feature = models.ForeignKey(Features)
     author = models.ForeignKey(User)
     published = models.DateField(default=localtime, editable=False)
 

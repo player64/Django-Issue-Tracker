@@ -20,6 +20,7 @@ from .settings import MEDIA_ROOT, WEBPACK_COMPILED_ASSETS
 from accounts import urls as urls_accounts
 from pages import urls as pages_urls
 from bugs import urls as bugs_urls
+from features import urls as features_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,5 +28,6 @@ urlpatterns = [
     url(r'^compiled-static/webpack-bundle/(?P<path>.*)$', static.serve, {'document_root': WEBPACK_COMPILED_ASSETS}),
     url(r'^', include(pages_urls), name='pages'),
     url(r'^accounts/', include(urls_accounts)),
-    url(r'^bugs/', include(bugs_urls))
+    url(r'^bugs/', include(bugs_urls)),
+    url(r'^features/', include(features_urls))
 ]

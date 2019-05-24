@@ -2,7 +2,7 @@ from django.test import TestCase
 from .forms import BugForm, BugCommentForm
 
 
-class TestUserForms(TestCase):
+class TestBugsForms(TestCase):
 
     def test_bug_form_with_correct_values(self):
         form = BugForm({

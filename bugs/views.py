@@ -7,7 +7,7 @@ from .forms import BugForm, BugCommentForm
 
 @login_required()
 def archive(request):
-    bugs = Bugs.objects.all()
+    bugs = Bugs.objects.all().order_by('-published')
     return render(request, 'archive.html', {'bugs': bugs})
 
 
