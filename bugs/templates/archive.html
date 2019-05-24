@@ -1,4 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% if bugs %}
+        {% for bug in bugs %}
+            <div class="bug">
+                {% include 'single_card.html' with bug=bug %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning">
+            No bugs
+        </div>
+    {% endif %}
 {% endblock %}
