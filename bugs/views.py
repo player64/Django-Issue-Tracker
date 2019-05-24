@@ -81,7 +81,6 @@ def edit(request, pk):
 
 @login_required()
 def vote(request, pk):
-    # https://stackoverflow.com/questions/17114676/checking-if-an-item-is-contained-in-a-manytomanyfield-django
     if request.method == "POST":
         bug = get_object_or_404(Bugs, pk=pk)
         current_user = request.user
