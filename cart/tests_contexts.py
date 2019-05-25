@@ -17,6 +17,8 @@ class TestContexts(TestCase):
 
     def test_context(self):
         self.assertEqual(number_items_in_cart(self.client)['cart_items'], 0)
+        self.assertEqual(number_items_in_cart(self.client)['cart_total_price'], 0)
         feature = self.create_feature(self.user)
         response = self.client.post('/cart/add/{}'.format(feature.id), follow=True)
         self.assertEqual(response.context['cart_items'], 1)
+        self.assertEqual(response.context['cart_total_price'], 50)

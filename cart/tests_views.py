@@ -51,8 +51,10 @@ class TestViews(TestCase):
         self.client.post('/cart/add/{}'.format(feature.id), follow=True)
         str_id = str(feature.id)
         self.assertEqual(self.client.session['cart'][str_id]['qty'], 1)
+        self.assertEqual(self.client.session['cart_total_price'], 50)
         self.client.post('/cart/add/{}'.format(feature.id), follow=True)
         self.assertEqual(self.client.session['cart'][str_id]['qty'], 2)
+        self.assertEqual(self.client.session['cart_total_price'], 100)
 
     # DELETE
     def test_delete_cart_status(self):

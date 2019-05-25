@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Features, FeatureComment
 
-# Register your models here.
+admin.site.register(Features)
+admin.site.register(FeatureComment)
+

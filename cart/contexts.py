@@ -5,4 +5,8 @@ def number_items_in_cart(request):
     settings.py -> TEMPLATES -> OPTIONS -> context_processors
     """
     cart = request.session.get('cart', {})
-    return {'cart_items': len(cart.keys()) if cart.keys() else 0}
+    cart_total_price = request.session.get('cart_total_price', 0)
+    return {
+        'cart_items': len(cart.keys()) if cart.keys() else 0,
+        'cart_total_price': cart_total_price
+    }

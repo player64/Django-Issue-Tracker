@@ -25,6 +25,7 @@ def add(request, feature_id):
     feature = get_object_or_404(Features, pk=feature_id)
     feature = model_to_dict(feature, fields=['id', 'name', 'description'])
     cart = request.session.get('cart', {})
+
     if feature_id not in cart:
         feature.update({
             'qty': 1,
@@ -35,8 +36,15 @@ def add(request, feature_id):
     else:
         cart[feature_id]['qty'] += 1
         cart[feature_id]['total_price'] = cart[feature_id]['qty'] * price
+
+    # adjust total price
+    cart_total_price = 0
+    for item in cart:
+        cart_total_price += cart[item]['total_price']
+
     messages.success(request, 'Successfully added item to the cart')
     request.session['cart'] = cart
+    request.session['cart_total_price'] = cart_total_price
     request.session.modified = True
     return redirect('feature_archive')
 
