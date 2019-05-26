@@ -3,7 +3,8 @@ from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
-
+from bugs.models import Bugs
+from features.models import Features
 
 def logout(request):
     """A view that logs the user out and redirects back to the index page"""
@@ -24,7 +25,7 @@ def login(request):
                                      password=request.POST['password'])
             if user:
                 auth.login(request, user)
-                messages.error(request, "You have successfully logged in")
+                messages.success(request, "You have successfully logged in")
 
                 if request.GET and request.GET['next'] != '':
                     return HttpResponseRedirect(request.GET['next'])
@@ -41,7 +42,10 @@ def login(request):
 @login_required
 def profile(request):
     """A view that displays the profile page of a logged in user"""
-    return render(request, 'profile.html')
+    bugs = Bugs.objects.filter(author=request.user)
+    features = Features.objects.filter(author=request.user)
+    return render(request, 'profile.html', {'bugs': bugs, 'features': features,
+                                            'body_class': 'features'})
 
 
 def register(request):

@@ -1,4 +1,5 @@
 {% load render_bundle from webpack_loader %}
+{% load archive_extras %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item{% if request.path == '/' %} active{% endif %}">
-                <a class="nav-link"  href="{% url 'index' %}">Home</a>
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item{% if request.path == '/about-us/' %} active{% endif %}">
                 <a class="nav-link" href="{% url 'page_about' %}">About us</a>
@@ -29,13 +30,23 @@
                 <a class="nav-link" href="{% url 'page_stats' %}">Statistics</a>
             </li>
             {% if user.is_authenticated %}
+                <li class="nav-item{% if request.path == '/cart/' or request.path == '/checkout/' %}
+                active{% endif %}">
+                    <a href="{% url 'cart' %}" class="nav-link">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        Cart
+                        {% if cart_items > 0 %}
+                            <span class="badge badge-light">{{ cart_items }}</span>
+                        {% endif %}
+                    </a>
+                </li>
                 <li class="nav-item{% if request.path == '/accounts/profile/' %} active{% endif %}">
                     <a href="{% url 'profile' %}" class="nav-link">Profile</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if request.path|active_helper:'/bugs' %} active{% endif %}">
                     <a href="{% url 'bug_archive' %}" class="nav-link">Bugs</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if request.path|active_helper:'/features' %} active{% endif %}">
                     <a href="{% url 'feature_archive' %}" class="nav-link">Features</a>
                 </li>
                 <li class="nav-item">
@@ -53,23 +64,29 @@
     </div>
 </nav>
 {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                {{ message }}
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="messages text-center">
+        <div class="">
+            {% for message in messages %}
+                <div class="{% if message.tags %}
+        alert alert-{{ message.tags|bootstrap_status }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endif %}
 <main class="content">
     {% block content %}
     {% endblock %}
 </main>
+{% block footer_js %}
+{% endblock %}
 {% render_bundle 'runtime' 'js' %}
 {% render_bundle 'npm.font-awesome' 'js' %}
 {% render_bundle 'npm.style-loader' 'js' %}
 {% render_bundle 'undefined' 'js' %}
 {% render_bundle 'npm.jquery' 'js' %}
 {% render_bundle 'app' 'js' %}
+
 </body>
 </html>

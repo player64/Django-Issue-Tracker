@@ -1,5 +1,11 @@
 $bg-colour: #F2F8FC;
-$primary-color: #1b5e20 !default;
-$link-color: #b71c1c !default;
+$primary-color: #001A23;
+$secondary-color: #436436;
+$link-color: #b71c1c;
 $sm-header-height: 54px;
 $lg-header-height: 64px;
+
+$theme-colors: (
+  "primary": $primary-color,
+  "secondary": $secondary-color
+);

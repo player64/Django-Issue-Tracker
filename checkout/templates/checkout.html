@@ -1,5 +1,38 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
+    <div class="container">
+        <h1>Checkout</h1>
+        {% include '_cart_overview.html' with cart_total_price=total_price cart=cart_items checkout=True %}
+        <a style="margin-bottom: 30px" href="{% url 'cart' %}" class="btn btn-danger btn-sm">&leftarrow; Go back to the
+            cart</a>
+        <form method="post" id="checkout_form" action="{% url 'checkout' %}">
+            {% csrf_token %}
+            <legend>Payment details</legend>
 
+            <div class="credit-card-errors alert alert-danger" style="display: none">
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    {{ order_form|crispy }}
+                </div>
+                <div class="col-md-5 offset-md-1">
+
+                    {{ payment_form|crispy }}
+                    <button type="submit" class="btn btn-lg btn-secondary">
+                        Pay &euro;{{ total_price }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block footer_js %}
+    <script src="https://js.stripe.com/v2/"></script>
+    <script>
+        //<![CDATA[
+        Stripe.publishableKey = '{{ stripe_publishable }}';
+        //]]>
+    </script>
 {% endblock %}

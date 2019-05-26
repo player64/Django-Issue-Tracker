@@ -1,15 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if bugs %}
-        {% for bug in bugs %}
-            <div class="bug">
-                {% include 'single_card.html' with bug=bug %}
+    <div class="container">
+        {% if items %}
+            <h1>{{ title }}</h1>
+            <div class="row">
+                {% for item in items %}
+                    <div class="col-lg-4 col-md-6">
+                        {% include '_single_card.html' with item=item %}
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    {% else %}
-        <div class="alert alert-warning">
-            No bugs
+        {% else %}
+            <div class="alert alert-warning text-center">
+                {{ no_results_txt }}
+            </div>
+        {% endif %}
+        <div class="text-center archive_cta">
+            <a href="{{ add_url }}" class="btn btn-secondary btn-lg">
+                Add new <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
         </div>
-    {% endif %}
+    </div>
 {% endblock %}

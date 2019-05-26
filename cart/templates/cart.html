@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    <div class="container">
+        <h1>Cart</h1>
+        {% if cart %}
+            {% include '_cart_overview.html' %}
+            <div class="text-right">
+                <a href="{% url 'checkout' %}" class="btn-primary btn btn-lg">
+                    Checkout
+                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                </a>
+            </div>
+        {% else %}
+            <div class="alert alert-warning">
+                Your cart is empty
+            </div>
+            <div class="text-center">
+                <a href="{% url 'feature_archive' %}" class="btn btn-primary">
+                    Go back to features</a>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

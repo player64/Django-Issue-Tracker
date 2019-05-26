@@ -7,8 +7,12 @@ from .forms import FeatureForm, FeatureCommentForm
 
 @login_required()
 def archive(request):
-    features = Features.objects.all().order_by('paid_no', '-published')
-    return render(request, 'archive.html', {'features': features})
+    features = Features.objects.all().order_by('-paid_no', '-published')
+    return render(request, 'archive.html', {'items': features, 'title': 'Features',
+                                            'no_results_txt': 'Any feature has been found',
+                                            'add_url': reverse('feature_new'),
+                                            'body_class': 'features',
+                                            'archive_name': 'features'})
 
 
 @login_required()
@@ -28,7 +32,6 @@ def single(request, pk):
 
     comment_form = FeatureCommentForm()
     comments = FeatureComment.objects.filter(feature__pk=pk)
-    comments_total = len(comments)
     user_views = request.session.get('user_feature_views', [])
 
     # don't count views if the user is the author and don't let increment views by refreshing the page
@@ -39,9 +42,10 @@ def single(request, pk):
         request.session['user_feature_views'] = user_views
         request.session.modified = True
 
-    return render(request, 'single.html', {'feature': feature,
+    return render(request, 'single.html', {'item': feature,
                                            'comments': comments,
-                                           'comments_total': comments_total,
+                                           'archive_name': 'features',
+                                           'body_class': 'single_posts features',
                                            'comments_form': comment_form})
 
 
@@ -56,7 +60,7 @@ def add(request):
             messages.success(request, "Feature has been created")
             return redirect('feature_single', feature.pk)
     form = FeatureForm()
-    return render(request, 'add.html', {'form': form})
+    return render(request, 'add_edit.html', {'form': form, 'title': 'Add new feature'})
 
 
 @login_required()
@@ -76,7 +80,7 @@ def edit(request, pk):
             return redirect('feature_single', feature.pk)
 
     form = FeatureForm(instance=feature)
-    return render(request, 'edit.html', {'form': form})
+    return render(request, 'add_edit.html', {'form': form, 'title': 'Edit feature'})
 
 
 @login_required()

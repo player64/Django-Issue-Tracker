@@ -65,7 +65,7 @@ class TestViews(TestCase):
     def test_add_status(self):
         response = self.client.get('/features/new/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'add.html')
+        self.assertTemplateUsed(response, 'add_edit.html')
 
     def test_add_new_feature(self):
         new_feature = {
@@ -81,7 +81,7 @@ class TestViews(TestCase):
         feature = self.create_feature(self.user)
         response = self.client.get('/features/edit/{}/'.format(feature.id))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'edit.html')
+        self.assertTemplateUsed(response, 'add_edit.html')
 
     def test_edit_feature(self):
         feature = self.create_feature(self.user)

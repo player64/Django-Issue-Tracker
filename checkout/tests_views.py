@@ -48,7 +48,7 @@ class TestViews(TestCase):
         }
 
     def create_checkout(self):
-        feature = TestViews.create_feature(self.user)
+        feature = self.create_feature(self.user)
         self.client.post('/cart/add/{}'.format(feature.id), follow=True)
 
     def setUp(self):
@@ -74,11 +74,13 @@ class TestViews(TestCase):
     def test_insufficient_funds_payment(self):
         self.create_checkout()
         response = self.client.post('/checkout/', data=self.buyer_data('no_funds'), follow=True)
+        self.failureException(Exception)
         self.assertContains(response, 'Your card was declined!', 1, 200)
 
     def test_declined_payment(self):
         self.create_checkout()
         response = self.client.post('/checkout/', data=self.buyer_data('declined'), follow=True)
+        self.failureException(Exception)
         self.assertContains(response, 'Your card was declined!', 1, 200)
 
     def test_no_valid_form(self):

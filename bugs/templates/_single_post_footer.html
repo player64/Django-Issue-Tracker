@@ -1,0 +1,97 @@
+<footer class="info-post row">
+    <div class="col-sm-6">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        {{ item.author.username }}
+    </div>
+    <div class="col-sm-6">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        {{ item.published|date:'d.m.Y' }}
+    </div>
+    <div class="col-sm-6 vote{% if user in item.voted_by.all %} voted{% endif %}">
+        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+        {% if archive_name == 'bugs' %}
+            {% if item.author != user %}
+                <form method="post" action="/{{ archive_name }}/vote/{{ item.id }}/">
+                    {% csrf_token %}
+                    <button type="submit">{{ item.voted_by.values_list|length }} votes</button>
+                </form>
+            {% else %}
+                {{ item.voted_by.values_list|length }} votes
+            {% endif %}
+
+        {% elif archive_name == 'features' %}
+            <button class="voteUp callCart">
+                {{ item.paid_no }} votes
+            </button>
+            <div class="popUpCart" style="display: none">
+                <div class="card">
+                    <div class="card-header">
+                        Vote for this feature
+                    </div>
+                    <div class="card-body">
+                        You are about to vote for this feature. To prioritise that feature you'll
+                        need to pay a fee €50. Click add to cart and then proceed to the checkout.
+                        <form action="{% url 'cart_add' item.id %}" method="post">
+                            {% csrf_token %}
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <button type="submit" class="btn btn-sm btn-success">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        Add to cart
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button type="button" class="closePopUp btn btn-sm
+                            btn-danger">cancel
+                                    </button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-sm-6">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+        {{ item.views }} views
+    </div>
+</footer>
+<footer class="cta row">
+    {% if archive %}
+        <div class="col-sm-6">
+            <a href="/{{ archive_name }}/{{ item.id }}/" class="btn btn-primary {{ cta_class }}">
+                Read more
+            </a>
+        </div>
+    {% endif %}
+    {% if item.author == user %}
+        <div class="col-sm-6">
+            <a href="/{{ archive_name }}/edit/{{ item.id }}/" class="btn btn-secondary {{ cta_class }}">
+                <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+            </a>
+        </div>
+        {% if not archive %}
+            <div class="col-sm-6">
+                <button type="submit" id="deletePost"
+                        class="btn btn-lg btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i> delete
+                </button>
+                <div class="deletionConfirm">
+                    Are you sure to delete? This action is not reversible.
+                    <form method="post" action="/{{ archive_name }}/delete/{{ item.id }}/">
+                        {% csrf_token %}
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <button type="submit" class="btn btn-sm btn-danger">delete</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" id="cancelDeletion" class="btn btn-sm btn-success">cancel</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</footer>

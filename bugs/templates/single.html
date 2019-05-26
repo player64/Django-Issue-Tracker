@@ -1,4 +1,39 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
+    <div class="container">
+        <h1>{{ item.name }}</h1>
+        <p>{{ item.description }}</p>
+        {% include '_single_post_footer.html' with item=item cta_class='btn-lg' %}
+
+        <section class="comments">
+            <h3 class="comments-title"><i class="fa fa-comment" aria-hidden="true"></i>
+                Comments ({{ comments|length }})</h3>
+            {% if comments|length %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <div class="row">
+                            <div class="col-3">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                {{ comment.author.username }}
+                            </div>
+                            <div class="col-9">
+                                {{ comment.comment }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% crispy comments_form %}
+        </section>
+    </div>
+
+
+    {% comment %}
+    {% for voter in bug.voted_by.all %}
+        <h2>{{ voter.username }}</h2>
+    {% endfor %}
+ {% endcomment %}
+
 {% endblock %}

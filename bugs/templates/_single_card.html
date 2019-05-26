@@ -1,0 +1,15 @@
+{% load archive_extras %}
+<article class="card">
+    <h6 class="card-header status {{ item.status }}">
+        {{ item.status|readable_status }}
+    </h6>
+    <div class="card-body">
+        <h4 class="card-title">
+            <a href="/{{ archive_name }}/{{ item.id }}/">
+                {{ item.name }}
+            </a>
+        </h4>
+        <p class="card-text">{{ item.description|truncatewords:5 }}</p>
+        {% include '_single_post_footer.html' with item=item cta_class='btn-sm' archive=True %}
+    </div>
+</article>

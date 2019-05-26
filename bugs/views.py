@@ -8,7 +8,9 @@ from .forms import BugForm, BugCommentForm
 @login_required()
 def archive(request):
     bugs = Bugs.objects.all().order_by('-published')
-    return render(request, 'archive.html', {'bugs': bugs})
+    return render(request, 'archive.html',
+                  {'items': bugs, 'title': 'Bugs', 'no_results_txt': 'Any bug has been found',
+                   'add_url': reverse('bug_new'), 'archive_name': 'bugs'})
 
 
 @login_required()
@@ -28,7 +30,6 @@ def single(request, pk):
 
     comment_form = BugCommentForm()
     comments = BugComment.objects.filter(bug__pk=bug.pk)
-    comments_total = len(comments)
     user_views = request.session.get('user_bug_views', [])
 
     # don't count views if the user is the author and don't let increment views by refreshing the page
@@ -39,9 +40,10 @@ def single(request, pk):
         request.session['user_bug_views'] = user_views
         request.session.modified = True
 
-    return render(request, 'single.html', {'bug': bug,
+    return render(request, 'single.html', {'item': bug,
+                                           'archive_name': 'bugs',
                                            'comments': comments,
-                                           'comments_total': comments_total,
+                                           'body_class': 'single_posts',
                                            'comments_form': comment_form})
 
 
@@ -56,7 +58,7 @@ def add(request):
             messages.success(request, "Bug has been created")
             return redirect('bug_single', bug.pk)
     form = BugForm()
-    return render(request, 'add.html', {'form': form})
+    return render(request, 'add_edit.html', {'form': form, 'title': 'Add new bug'})
 
 
 @login_required()
@@ -76,7 +78,7 @@ def edit(request, pk):
             return redirect('bug_single', bug.pk)
 
     form = BugForm(instance=bug)
-    return render(request, 'edit.html', {'form': form})
+    return render(request, 'add_edit.html', {'form': form, 'title': 'Edit bug'})
 
 
 @login_required()
@@ -106,4 +108,5 @@ def delete(request, pk):
             messages.error(request, "You cannot delete someone bug")
             return redirect(reverse('bug_archive'))
         bug.delete()
+        messages.success(request, "Bug has been deleted")
         return redirect(reverse('bug_archive'))

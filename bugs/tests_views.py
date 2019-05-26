@@ -66,7 +66,7 @@ class TestViews(TestCase):
     def test_add_status(self):
         response = self.client.get('/bugs/new/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'add.html')
+        self.assertTemplateUsed(response, 'add_edit.html')
 
     def test_add_new_bug(self):
         new_bug = {
@@ -82,7 +82,7 @@ class TestViews(TestCase):
         bug = self.create_bug(self.user)
         response = self.client.get('/bugs/edit/{}/'.format(bug.id))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'edit.html')
+        self.assertTemplateUsed(response, 'add_edit.html')
 
     def test_edit_bug(self):
         bug = self.create_bug(self.user)

@@ -18,12 +18,6 @@
   }
 }
 
-*,
-:after,
-:before {
-  box-sizing: border-box;
-}
-
 body {
   font-family: 'Roboto Condensed', sans-serif;
   background-color: $bg-colour;
@@ -59,4 +53,15 @@ main.content {
 
 .hidden {
   display: none;
+}
+
+a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.btn {
+  text-transform: uppercase;
 }

@@ -1,7 +1,47 @@
 {% extends 'base.html' %}
-{% block page_title %}
-    {{ user }}'s Profile
-{% endblock %}
 {% block content %}
-    <p>{{ profile.email }}</p>
+    <div class="container">
+        <section class="profile_archive">
+            <h2>Your added bugs</h2>
+            {% if bugs %}
+                <div class="row">
+                    {% for item in bugs %}
+                        <div class="col-lg-4 col-md-6">
+                            {% include '_single_card.html' with item=item archive_name='bugs' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning text-center">
+                    You haven't add any bug
+                </div>
+            {% endif %}
+            <div class="text-center">
+                <a href="{% url 'bug_new' %}" class="btn btn-secondary btn-lg">
+                    Add new bug <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            </div>
+        </section>
+        <section class="profile_archive">
+            <h2>Your added features</h2>
+            {% if features %}
+                <div class="row">
+                    {% for item in features %}
+                        <div class="col-lg-4 col-md-6">
+                            {% include '_single_card.html' with item=item archive_name='features' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning text-center">
+                    You haven't add any feature
+                </div>
+            {% endif %}
+            <div class="text-center">
+                <a href="{% url 'feature_new' %}" class="btn btn-primary btn-lg">
+                    Add new feature <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            </div>
+        </section>
+    </div>
 {% endblock %}

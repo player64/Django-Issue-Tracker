@@ -37,16 +37,12 @@ def add(request, feature_id):
         cart[feature_id]['qty'] += 1
         cart[feature_id]['total_price'] = cart[feature_id]['qty'] * price
 
-    # adjust total price
-    cart_total_price = 0
-    for item in cart:
-        cart_total_price += cart[item]['total_price']
+    calculate_total_price(request)
 
     messages.success(request, 'Successfully added item to the cart')
     request.session['cart'] = cart
-    request.session['cart_total_price'] = cart_total_price
     request.session.modified = True
-    return redirect('feature_archive')
+    return redirect('cart')
 
 
 @login_required()
@@ -55,5 +51,15 @@ def delete(request, feature_id):
     if feature_id in cart:
         cart.pop(feature_id)
         request.session['cart'] = cart
+    calculate_total_price(request)
     messages.success(request, 'Successfully deleted item from the cart')
     return redirect(reverse('cart'))
+
+
+def calculate_total_price(request):
+    cart = request.session.get('cart', {})
+    # adjust total price
+    cart_total_price = 0
+    for item in cart:
+        cart_total_price += cart[item]['total_price']
+    request.session['cart_total_price'] = cart_total_price
