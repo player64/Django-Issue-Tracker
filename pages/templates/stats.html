@@ -6,12 +6,13 @@
             <div class="container">
                 <h1>Statistics</h1>
                 <hr>
-                <a href="{% url 'register' %}" class="btn btn-secondary">Join our community</a>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'register' %}" class="btn btn-secondary">Join our community</a>
+                {% endif %}
             </div>
         </div>
     </div>
     <div class="container-fluid">
-
         <div class="alert alert-success">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
             To add new feature or bug <a href="{% url 'register' %}">create you account here.</a>

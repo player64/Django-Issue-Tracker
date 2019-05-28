@@ -1,4 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Home</h1>
+    <div class="imageContainer">
+        {% include '_responsive_images.html' with filename='home' %}
+        <div class="bgImgContent">
+            <div class="container">
+                <h1 class="h1">We develop Your ideas!</h1>
+                <hr>
+                <p class="text-white">We produce innovative open source software transform, engage and inspire. </p>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'register' %}" class="btn btn-secondary">Join our community</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row home-intro">
+            <div class="col-md-6">
+                <article class="card">
+                    <h5 class="card-header community">
+                        <i class="fa fa-comments" aria-hidden="true"></i>
+                        Community
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text">Our online community allows users to share bugs,
+                            suggest new features and talk to fellow developers using our software!</p>
+                        <a href="{% url 'page_stats' %}" class="btn btn-primary">Read more</a>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-6">
+                <article class="card">
+                    <h5 class="card-header about">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        About us
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text">We are a group of developers who likes to share with work done with the other giving free of charge useful software</p>
+                        <a href="{% url 'register' %}" class="btn btn-secondary">Join us</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
 {% endblock %}

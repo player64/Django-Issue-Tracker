@@ -27,8 +27,14 @@
                 <a class="nav-link" href="{% url 'page_stats' %}">Statistics</a>
             </li>
             {% if user.is_authenticated %}
+                <li class="nav-item {% if request.path|active_helper:'/bugs' %} active{% endif %}">
+                    <a href="{% url 'bug_archive' %}" class="nav-link">Bugs</a>
+                </li>
+                <li class="nav-item {% if request.path|active_helper:'/features' %} active{% endif %}">
+                    <a href="{% url 'feature_archive' %}" class="nav-link">Features</a>
+                </li>
                 <li class="nav-item{% if request.path == '/cart/' or request.path == '/checkout/' %}
-                active{% endif %}">
+                active{% endif %} cart">
                     <a href="{% url 'cart' %}" class="nav-link">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         Cart
@@ -38,16 +44,16 @@
                     </a>
                 </li>
                 <li class="nav-item{% if request.path == '/accounts/profile/' %} active{% endif %}">
-                    <a href="{% url 'profile' %}" class="nav-link">Profile</a>
-                </li>
-                <li class="nav-item {% if request.path|active_helper:'/bugs' %} active{% endif %}">
-                    <a href="{% url 'bug_archive' %}" class="nav-link">Bugs</a>
-                </li>
-                <li class="nav-item {% if request.path|active_helper:'/features' %} active{% endif %}">
-                    <a href="{% url 'feature_archive' %}" class="nav-link">Features</a>
+                    <a href="{% url 'profile' %}" class="nav-link">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Profile
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                    <a href="{% url 'logout' %}" class="nav-link">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        Logout
+                    </a>
                 </li>
             {% else %}
                 <li class="nav-item{% if request.path == '/accounts/register/' %} active{% endif %}">
@@ -76,6 +82,9 @@
     {% block content %}
     {% endblock %}
 </main>
+<footer class="master text-white text-center">
+    Copyright &copy; by ISSUE TRACKER {% now "Y" %}
+</footer>
 {% block footer_js %}
 {% endblock %}
 {% render_bundle 'runtime' 'js' %}
@@ -87,6 +96,5 @@
 {% render_bundle 'npm.jquery' 'js' %}
 {% render_bundle 'undefined' 'js' %}
 {% render_bundle 'app' 'js' %}
-
 </body>
 </html>

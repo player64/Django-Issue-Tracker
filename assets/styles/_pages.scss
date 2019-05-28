@@ -1,0 +1,20 @@
+.home-intro {
+  .card {
+    text-align: center;
+
+    .card-header {
+      background-color: $secondary-color;
+      color: #fff;
+
+      &.community {
+        background-color: $primary-color;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    & > [class^=col]:first-child {
+      margin-bottom: 30px;
+    }
+  }
+}
