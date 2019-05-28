@@ -24,10 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = os.getenv('SECRET_KEY')
 SECRET_KEY = os.environ.get('SECRET_KEY', '6c*7xvk%^+wqc5h2zl0bn2qgj5#6)4z&4m9(h@gl1oz+6e(41b')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'django--issue-tracker.herokuapp.com'
+    'django--issue-tracker.herokuapp.com', 'localhost'
 ]
 
 # Application definition
@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'issue_tracker.urls'
@@ -84,7 +85,7 @@ WSGI_APPLICATION = 'issue_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
-if 'DATABASE_URL' in  os.environ:
+if 'DATABASE_URL' in os.environ:
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 else:
     print('Database URL not found. Using SqLite instead')
@@ -139,10 +140,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_LOCATION = 'compiled-static'
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'compiled-static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 FAKER_LOCALE = 'en_US'
@@ -173,5 +174,3 @@ STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
 STRIPE_SECRET = os.getenv('STRIPE_SECRET')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
