@@ -85,5 +85,9 @@ def create_features_comments(no):
 
 if __name__ == '__main__':
     print("Filling random data")
-    create_features_comments(60)
+    # create_users(30)
+    # create_bugs(40)
+    # create_features(40)
+    # create_bugs_comments(60)
+    # create_features_comments(60)
     print("Filling done ")
