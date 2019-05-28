@@ -14,7 +14,7 @@ class TestFeaturesModel(TestCase):
         self.assertEqual(feature.description, 'description')
         self.assertEqual(feature.status, 'todo')
         self.assertEqual(feature.views, 0)
-        self.assertEqual(feature.paid_no, 0)
+        self.assertEqual(feature.total_votes, 0)
         self.assertEqual(feature.author_id, 1)
 
     def test_comment_name(self):

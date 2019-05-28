@@ -137,6 +137,8 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'compiled-static'),
 ]
 
+FAKER_LOCALE = 'en_US'
+
 WEBPACK_STATIC_URL = '/compiled-static/'
 WEBPACK_COMPILED_ASSETS = os.path.join(BASE_DIR, 'compiled-static', 'webpack-bundle')
 

@@ -7,7 +7,7 @@ from .forms import FeatureForm, FeatureCommentForm
 
 @login_required()
 def archive(request):
-    features = Features.objects.all().order_by('-paid_no', '-published')
+    features = Features.objects.all().order_by('-total_votes', '-published')
     return render(request, 'archive.html', {'items': features, 'title': 'Features',
                                             'no_results_txt': 'Any feature has been found',
                                             'add_url': reverse('feature_new'),

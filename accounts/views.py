@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from bugs.models import Bugs
 from features.models import Features
 
+
 def logout(request):
     """A view that logs the user out and redirects back to the index page"""
     auth.logout(request)

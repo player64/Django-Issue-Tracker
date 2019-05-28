@@ -4,6 +4,11 @@
     <div class="container">
         <h1>Cart</h1>
         {% if cart %}
+            <div class="alert alert-warning" role="alert">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                The highest voted feature will be developed and released in the next update. To
+                increase chances to develop that features, increase the quantities for each feature.
+            </div>
             {% include '_cart_overview.html' %}
             <div class="text-right">
                 <a href="{% url 'checkout' %}" class="btn-primary btn btn-lg">

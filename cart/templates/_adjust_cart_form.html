@@ -1,0 +1,12 @@
+{% if not checkout %}
+    <form action="{% url 'cart_adjust' action item.id %}">
+        {% csrf_token %}
+        <button type="submit" class="adjust_btn {{ action }}">
+            {% if action == 'increment' %}
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            {% else %}
+                <i class="fa fa-minus" aria-hidden="true"></i>
+            {% endif %}
+        </button>
+    </form>
+{% endif %}

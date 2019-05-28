@@ -3,8 +3,16 @@
 {% block content %}
     <div class="container">
         {% if items %}
-            <h1>{{ title }}</h1>
-            <div class="row">
+            <div class="row" style="margin-bottom: 30px">
+                <h1 class="col-md-6">{{ title }}</h1>
+                <div class="col-md-6 text-md-right text-center">
+                    <a href="{{ add_url }}" class="btn btn-secondary btn-lg">
+                        Add new <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row cards-archive">
                 {% for item in items %}
                     <div class="col-lg-4 col-md-6">
                         {% include '_single_card.html' with item=item %}

@@ -10,7 +10,7 @@ class PaymentForm(forms.Form):
     year_choices = [(i, i) for i in range(current_year, current_year+20)]
 
     credit_card_number = forms.CharField(label='Credit card number')
-    cvv = forms.CharField(label='Security code (CVV)', required=False)
+    cvv = forms.CharField(label='Security code (CVV)')
     expiry_month = forms.ChoiceField(label='Month', choices=month_choices)
     expiry_year = forms.ChoiceField(label='Year', choices=year_choices)
     stripe_id = forms.CharField(widget=forms.HiddenInput)

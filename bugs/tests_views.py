@@ -129,6 +129,12 @@ class TestViews(TestCase):
         self.assertEqual(len(bug.voted_by.values_list()), 0)
         self.assertContains(response, "You cannot vote for own bug", 1, 200)
 
+    def test_vote_and_check_redirection_when_next_get_is_defined(self):
+        bug = self.create_bug(self.create_other_user())
+        response = self.client.post('/bugs/vote/{0}/?next=/bugs/{0}/'.format(bug.id), follow=True)
+        self.assertContains(response, "You have voted up for this bug", 1, 200)
+        self.assertTemplateUsed(response, 'single.html')
+
     # DELETE
     def test_delete_bug(self):
         bug = self.create_bug(self.user)

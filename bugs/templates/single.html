@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
+{% load archive_extras %}
 {% block content %}
     <div class="container">
+        <h6 class="card-header post_status {{ item.status }}" style="margin-bottom: 15px">
+            {{ item.status|readable_status }}
+        </h6>
         <h1>{{ item.name }}</h1>
         <p>{{ item.description }}</p>
         {% include '_single_post_footer.html' with item=item cta_class='btn-lg' %}

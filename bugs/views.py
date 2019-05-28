@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponseRedirect
 from .models import Bugs, BugComment
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -90,12 +90,20 @@ def vote(request, pk):
         if bug.author_id == current_user.id:
             messages.error(request, "You cannot vote for own bug")
             return redirect(reverse('bug_archive'))
-        # assign Vote / Un vote action
+        # assign Vote / Up vote action
         if bug.voted_by.filter(pk=current_user.id).exists():
             bug.voted_by.remove(current_user)
+            bug.total_votes -= 1
+            messages.success(request, "You have voted down for this bug")
         else:
             bug.voted_by.add(current_user)
+            bug.total_votes += 1
+            messages.success(request, "You have voted up for this bug")
         bug.save()
+
+    if request.GET and request.GET['next'] != '':
+        return HttpResponseRedirect(request.GET['next'])
+
     return redirect(reverse('bug_archive'))
 
 

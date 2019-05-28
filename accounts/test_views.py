@@ -2,9 +2,6 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 
-# https://realpython.com/testing-in-django-part-1-best-practices-and-examples/
-
-
 class TestUserViews(TestCase):
 
     def authenticate(self):

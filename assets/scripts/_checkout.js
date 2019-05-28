@@ -12,6 +12,12 @@ export function checkout() {
             if (status === 200) {
                 $('.credit-card-errors').hide();
                 $('#id_stripe_id').val(response.id);
+
+                // remove credit card details
+                // $('#id_credit_card_number').val('');
+                // $('#id_cvv').val('');
+                // $('#id_expiry_month').val('');
+                // $('#id_expiry_year').val('');
                 form.submit();
             } else {
                 $('.credit-card-errors').text(response.error.message);

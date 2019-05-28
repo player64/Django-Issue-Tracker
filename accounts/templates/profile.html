@@ -4,7 +4,7 @@
         <section class="profile_archive">
             <h2>Your added bugs</h2>
             {% if bugs %}
-                <div class="row">
+                <div class="row cards-archive">
                     {% for item in bugs %}
                         <div class="col-lg-4 col-md-6">
                             {% include '_single_card.html' with item=item archive_name='bugs' %}
@@ -25,7 +25,7 @@
         <section class="profile_archive">
             <h2>Your added features</h2>
             {% if features %}
-                <div class="row">
+                <div class="row cards-archive">
                     {% for item in features %}
                         <div class="col-lg-4 col-md-6">
                             {% include '_single_card.html' with item=item archive_name='features' %}

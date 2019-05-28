@@ -1,27 +1,20 @@
 .card {
+  height: 100%;
 
   .cta {
     margin-top: 15px;
 
+
     a {
       display: block;
     }
+
   }
+}
 
-  .status {
-    color: #fff;
-
-    &.todo {
-      background-color: $link-color;
-    }
-
-    &.doing {
-      background-color: $primary-color;
-    }
-
-    &.done {
-      background-color: $secondary-color;
-    }
+.cards-archive {
+  & > [class^=col] {
+    margin-bottom: 30px;
   }
 }
 
@@ -131,8 +124,25 @@
 
   ul {
     margin-top: 10px;
+
     li {
       padding-right: 10px;
     }
+  }
+}
+
+.post_status {
+  color: #fff;
+
+  &.todo {
+    background-color: $link-color;
+  }
+
+  &.doing {
+    background-color: $primary-color;
+  }
+
+  &.done {
+    background-color: $secondary-color;
   }
 }

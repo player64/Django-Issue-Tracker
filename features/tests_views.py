@@ -105,19 +105,19 @@ class TestViews(TestCase):
         response = self.client.post('/features/edit/{}/'.format(feature.id), follow=True)
         self.assertContains(response, "You cannot edit someone feature", 1, 200)
 
-    def test_edit_someone_bug_by_post(self):
+    def test_edit_someone_feature_by_post(self):
         feature = self.create_feature(self.create_other_user())
         response = self.client.post('/features/edit/{}/'.format(feature.id), follow=True)
         self.assertContains(response, "You cannot edit someone feature", 1, 200)
 
     # DELETE
-    def test_delete_bug(self):
+    def test_delete_feature(self):
         feature = self.create_feature(self.user)
         self.client.post('/features/delete/{}/'.format(feature.id), follow=True)
         count_bugs = Features.objects.count()
         self.assertEqual(count_bugs, 0)
 
-    def test_delete_someone_bug(self):
+    def test_delete_someone_feature(self):
         user = self.create_other_user()
         feature = self.create_feature(user)
         response = self.client.post('/features/delete/{}/'.format(feature.id), follow=True)

@@ -38,7 +38,7 @@ def checkout_view(request):
                     order.save()
                     for feature_id in cart.keys():
                         feature = get_object_or_404(Features, pk=feature_id)
-                        feature.paid_no += 1
+                        feature.total_votes += int(cart[feature_id]['qty'])
                         feature.voted_by.add(request.user)
                         feature.save()
 
@@ -46,7 +46,7 @@ def checkout_view(request):
                             order=order,
                             feature=feature,
                             qty=cart[feature_id]['qty'],
-                            price=cart[feature_id]['unit_price']
+                            price=cart[feature_id]['total_price']
                         )
 
                         order_item.save()

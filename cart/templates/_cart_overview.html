@@ -1,10 +1,10 @@
 <div class="table-responsive cart-overview">
     <table class="table">
         <tr>
-            <th>Name</th>
+            <th width="200px">Name</th>
             <th>Description</th>
-            <th>Quantities</th>
-            <th>Price</th>
+            <th width="120px">Quantities</th>
+            <th width="100px">Price</th>
             <th></th>
         </tr>
         {% for item in cart %}
@@ -14,8 +14,18 @@
                         {{ item.name }}
                     </a>
                 </td>
-                <td>{{ item.description }}</td>
-                <td>{{ item.qty }}</td>
+                <td>{{ item.description|truncatewords:20 }}</td>
+                <td>
+                    <ul class="nav cart_adjust_nav">
+                    {% if not checkout %}
+                        <li>{% include '_adjust_cart_form.html' with action='decrement' %}</li>
+                    {% endif %}
+                    <li>{{ item.qty }}</li>
+                    {% if not checkout %}
+                        <li>{% include '_adjust_cart_form.html' with action='increment' %}</li>
+                    {% endif %}
+                    </ul>
+                </td>
                 <td>&euro;{{ item.total_price }}</td>
                 <td>
                     {% if not checkout %}

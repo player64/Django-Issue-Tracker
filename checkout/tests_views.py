@@ -52,7 +52,7 @@ class TestViews(TestCase):
         self.client.post('/cart/add/{}'.format(feature.id), follow=True)
 
     def setUp(self):
-        self.user = User.objects.create_user(username='username', email='test@test@.com',
+        self.user = User.objects.create_user(username='username', email='test@test.com',
                                              password='password')
         self.client.login(username='username', password='password')
 

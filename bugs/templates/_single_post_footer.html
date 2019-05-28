@@ -11,17 +11,17 @@
         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         {% if archive_name == 'bugs' %}
             {% if item.author != user %}
-                <form method="post" action="/{{ archive_name }}/vote/{{ item.id }}/">
+                <form method="post" action="/{{ archive_name }}/vote/{{ item.id }}/{% if not archive %}?next=/bugs/{{ item.id }}/{% endif %}">
                     {% csrf_token %}
-                    <button type="submit">{{ item.voted_by.values_list|length }} votes</button>
+                    <button type="submit">{{ item.total_votes }} votes</button>
                 </form>
             {% else %}
-                {{ item.voted_by.values_list|length }} votes
+                {{ item.total_votes }} votes
             {% endif %}
 
         {% elif archive_name == 'features' %}
             <button class="voteUp callCart">
-                {{ item.paid_no }} votes
+                {{ item.total_votes }} votes
             </button>
             <div class="popUpCart" style="display: none">
                 <div class="card">
@@ -59,14 +59,14 @@
 </footer>
 <footer class="cta row">
     {% if archive %}
-        <div class="col-sm-6">
+        <div class="col-6 readMore">
             <a href="/{{ archive_name }}/{{ item.id }}/" class="btn btn-primary {{ cta_class }}">
                 Read more
             </a>
         </div>
     {% endif %}
     {% if item.author == user %}
-        <div class="col-sm-6">
+        <div class="col-6">
             <a href="/{{ archive_name }}/edit/{{ item.id }}/" class="btn btn-secondary {{ cta_class }}">
                 <i class="fa fa-pencil" aria-hidden="true"></i> Edit
             </a>
