@@ -66,3 +66,37 @@ a {
 .btn {
   text-transform: uppercase;
 }
+
+.imageContainer {
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  background-color: #000;
+  position: relative;
+
+  @media (min-width: 600px) {
+    margin-top: -64px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    opacity: 0.3;
+  }
+
+  .bgImgContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate3d(-50%, -50%, 0);
+    text-align: center;
+
+    h1 {
+      color: #fff;
+    }
+
+    hr {
+      border-top-color: #fff;
+    }
+  }
+}

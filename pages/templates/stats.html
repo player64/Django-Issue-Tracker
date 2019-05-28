@@ -1,4 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Stats</h1>
+    <div class="imageContainer">
+        {% include '_responsive_images.html' with filename='stats-page' %}
+        <div class="bgImgContent">
+            <div class="container">
+                <h1>Statistics</h1>
+                <hr>
+                <a href="{% url 'register' %}" class="btn btn-secondary">Join our community</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+        <div class="alert alert-success">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            To add new feature or bug <a href="{% url 'register' %}">create you account here.</a>
+            <br>
+            Reported bugs will be developed ASAP, and the fix will be released in the next update.
+            <br>
+            The most voted feature will be developed and released in the next update. To vote for a
+            feature you need to pay &euro;50
+        </div>
+        <div class="row statCharts">
+            <div class="col-xl-6">
+                {% include '_chartSection.html' with type='features' %}
+            </div>
+            <div class="col-xl-6">
+                {% include '_chartSection.html' with type='bugs' %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

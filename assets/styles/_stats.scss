@@ -1,0 +1,17 @@
+@import "~chart.js/dist/Chart.css";
+
+.chartContainer {
+  padding-bottom: 15px;
+
+  .card-header {
+    margin-bottom: 30px;
+    background-color: #343a40;
+    color: rgba(#fff, 0.8);
+  }
+}
+
+.statCharts {
+  & > div {
+    margin-bottom: 30px;
+  }
+}

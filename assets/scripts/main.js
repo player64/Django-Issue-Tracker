@@ -3,6 +3,7 @@ import './common';
 import {checkout} from './_checkout';
 import {featuresVote} from "./_features";
 import {singlePostActions} from './_single';
+import {webStats} from './_stats';
 
 const _body = $('body');
 
@@ -16,4 +17,8 @@ if (_body.hasClass('features')) {
 
 if (_body.hasClass('checkout')) {
     checkout();
+}
+
+if (_body.hasClass('stats')) {
+    webStats();
 }

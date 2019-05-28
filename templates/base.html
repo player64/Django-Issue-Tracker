@@ -23,9 +23,6 @@
             <li class="nav-item{% if request.path == '/' %} active{% endif %}">
                 <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
-            <li class="nav-item{% if request.path == '/about-us/' %} active{% endif %}">
-                <a class="nav-link" href="{% url 'page_about' %}">About us</a>
-            </li>
             <li class="nav-item{% if request.path == '/stats/' %} active{% endif %}">
                 <a class="nav-link" href="{% url 'page_stats' %}">Statistics</a>
             </li>
@@ -82,10 +79,13 @@
 {% block footer_js %}
 {% endblock %}
 {% render_bundle 'runtime' 'js' %}
+{% render_bundle 'npm.moment' 'js' %}
+{% render_bundle 'npm.core-js' 'js' %}
 {% render_bundle 'npm.font-awesome' 'js' %}
+{% render_bundle 'npm.chart.js' 'js' %}
 {% render_bundle 'npm.style-loader' 'js' %}
-{% render_bundle 'undefined' 'js' %}
 {% render_bundle 'npm.jquery' 'js' %}
+{% render_bundle 'undefined' 'js' %}
 {% render_bundle 'app' 'js' %}
 
 </body>

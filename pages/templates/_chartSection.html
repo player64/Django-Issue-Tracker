@@ -1,0 +1,13 @@
+<section class="chartContainer card {{ type }}">
+    <h3 class="text-center card-header">{{ type|title }}</h3>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5 class="text-center">{{ type|upper }} DEVELOPMENT PROGRESS</h5>
+            <canvas id="{{ type }}Statuses" width="400" height="400"></canvas>
+        </div>
+        <div class="col-sm-6">
+            <h5 class="text-center">MOST VOTED {{ type|upper }}</h5>
+            <canvas id="{{ type }}Voted" width="400" height="400"></canvas>
+        </div>
+    </div>
+</section>

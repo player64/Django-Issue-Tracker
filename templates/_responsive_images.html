@@ -1,0 +1,9 @@
+<picture>
+    <source media="(min-width:421px) and (orientation: portrait)"
+            srcset="/media/{{ filename }}-md-portrait.jpg">
+    <source media="(orientation: landscape) and (max-width: 850px)"
+            srcset="/media/{{ filename }}-sm-landscape.jpg">
+    <source media="(orientation: portrait) and (max-width: 450px)"
+            srcset="/media/{{ filename }}-sm-portrait.jpg">
+    <img src="/media/{{ filename }}-xl.jpg" alt="Page stats" class="bgImg">
+</picture>
