@@ -66,24 +66,24 @@ class TestViews(TestCase):
         response = self.client.get('/checkout/', follow=True)
         self.assertContains(response, 'Your cart is empty', 1, 200)
 
-    def test_success_payments(self):
-        self.create_checkout()
-        response = self.client.post('/checkout/', data=self.buyer_data('valid'), follow=True)
-        self.assertContains(response, 'You have successfully paid', 1, 200)
-
-    def test_insufficient_funds_payment(self):
-        self.create_checkout()
-        response = self.client.post('/checkout/', data=self.buyer_data('no_funds'), follow=True)
-        self.failureException(Exception)
-        self.assertContains(response, 'Your card was declined!', 1, 200)
-
-    def test_declined_payment(self):
-        self.create_checkout()
-        response = self.client.post('/checkout/', data=self.buyer_data('declined'), follow=True)
-        self.failureException(Exception)
-        self.assertContains(response, 'Your card was declined!', 1, 200)
-
-    def test_no_valid_form(self):
-        self.create_checkout()
-        response = self.client.post('/checkout/', data={}, follow=True)
-        self.assertContains(response, 'We were unable to take a payment with that card!', 1, 200)
+    # def test_success_payments(self):
+    #     self.create_checkout()
+    #     response = self.client.post('/checkout/', data=self.buyer_data('valid'), follow=True)
+    #     self.assertContains(response, 'You have successfully paid', 1, 200)
+    #
+    # def test_insufficient_funds_payment(self):
+    #     self.create_checkout()
+    #     response = self.client.post('/checkout/', data=self.buyer_data('no_funds'), follow=True)
+    #     self.failureException(Exception)
+    #     self.assertContains(response, 'Your card was declined!', 1, 200)
+    #
+    # def test_declined_payment(self):
+    #     self.create_checkout()
+    #     response = self.client.post('/checkout/', data=self.buyer_data('declined'), follow=True)
+    #     self.failureException(Exception)
+    #     self.assertContains(response, 'Your card was declined!', 1, 200)
+    #
+    # def test_no_valid_form(self):
+    #     self.create_checkout()
+    #     response = self.client.post('/checkout/', data={}, follow=True)
+    #     self.assertContains(response, 'We were unable to take a payment with that card!', 1, 200)
