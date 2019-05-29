@@ -45,6 +45,8 @@ It's displaying user's added bugs & features
     * The project uses SCSS Preprocessors for compiling to CSS
 * [Webpack](https://webpack.js.org/)
     * The project uses webpack for bundling the assets
+* [Stripe](https://stripe.com/)
+    * Used stripe gateway to proceed payments
 * [Python faker](https://faker.readthedocs.io/en/latest/index.html)
     * It used to populate the fake content users/bugs/features/comments to run go to project folder python populator.py
 * [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/)
