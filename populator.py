@@ -111,6 +111,6 @@ if __name__ == '__main__':
     # create_features(40)
     # create_bugs_comments(60)
     # create_features_comments(60)
-    create_blog_posts(40)
-    create_blog_post_comment(60)
+    # create_blog_posts(40)
+    # create_blog_post_comment(60)
     print("Filling done ")

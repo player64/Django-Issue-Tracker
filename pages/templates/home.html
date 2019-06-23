@@ -36,7 +36,11 @@
                     </h5>
                     <div class="card-body">
                         <p class="card-text">We are a group of developers who likes to share with work done with the other giving free of charge useful software</p>
-                        <a href="{% url 'register' %}" class="btn btn-secondary">Join us</a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'profile' %}" class="btn btn-secondary">See profile</a>
+                        {% else %}
+                            <a href="{% url 'register' %}" class="btn btn-secondary">Join us</a>
+                        {% endif %}
                     </div>
                 </article>
             </div>

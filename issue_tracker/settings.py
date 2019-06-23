@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = os.getenv('SECRET_KEY')
 SECRET_KEY = os.environ.get('SECRET_KEY', '6c*7xvk%^+wqc5h2zl0bn2qgj5#6)4z&4m9(h@gl1oz+6e(41b')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'django--issue-tracker.herokuapp.com', 'localhost'
