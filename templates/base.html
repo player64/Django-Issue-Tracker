@@ -26,6 +26,9 @@
             <li class="nav-item{% if request.path == '/stats/' %} active{% endif %}">
                 <a class="nav-link" href="{% url 'page_stats' %}">Statistics</a>
             </li>
+            <li class="nav-item{% if request.path|active_helper:'/blog' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'blog_archive' %}">Blog</a>
+            </li>
             {% if user.is_authenticated %}
                 <li class="nav-item {% if request.path|active_helper:'/bugs' %} active{% endif %}">
                     <a href="{% url 'bug_archive' %}" class="nav-link">Bugs</a>

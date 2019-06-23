@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Blog</h1>
+        {% if items %}
+            <div class="row cards-archive">
+                {% for item in items %}
+                    <div class="col-lg-4 col-md-6">
+
+                        <article class="card" style="height: 100%">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="/blog/{{ item.id }}/">
+                                        {{ item.name }}
+                                    </a>
+                                </h4>
+                                <p>
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    {{ item.published|date:'d.m.Y' }}
+                                </p>
+                                <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+                                <a href="/blog/{{ item.id }}/"
+                                   class="btn btn-primary">
+                                    Read more
+                                </a>
+                            </div>
+                        </article>
+
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning text-center">
+                No posts found
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

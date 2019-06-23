@@ -6,6 +6,7 @@ import django
 django.setup()
 from bugs.models import Bugs, BugComment
 from features.models import Features, FeatureComment
+from blog.models import Post, PostComment
 from django.contrib.auth.models import User
 from faker import Faker
 import random
@@ -60,9 +61,13 @@ def create_features(no):
                                                                        end_date='now'))
 
 
-def get_random_post(type):
-    posts = Bugs.objects.all() if type == 'bugs' else Features.objects.all()
-    return random.choice(posts)
+def get_random_post(post_type):
+    if post_type == 'bugs':
+        return random.choice(Bugs.objects.all())
+    elif post_type == 'feature':
+        return random.choice(Features.objects.all())
+    elif post_type == 'blog':
+        return random.choice(Post.objects.all())
 
 
 def create_bugs_comments(no):
@@ -83,6 +88,22 @@ def create_features_comments(no):
                                                                              end_date='now'))
 
 
+def create_blog_posts(no):
+    for i in range(no):
+        Post.objects.get_or_create(name=convert_list_to_string(obj.text(max_nb_chars=30)),
+                                   description=convert_list_to_string(obj.paragraphs(nb=5)),
+                                   published=obj.date_time_between(start_date='-1y', end_date='now'))
+
+
+def create_blog_post_comment(no):
+    for i in range(no):
+        PostComment.objects.get_or_create(comment=convert_list_to_string(obj.paragraphs(nb=5)),
+                                          post_id=get_random_post('blog').id,
+                                          author=get_random_user(),
+                                          published=obj.date_time_between(start_date='-1y',
+                                                                          end_date='now'))
+
+
 if __name__ == '__main__':
     print("Filling random data")
     # create_users(30)
@@ -90,4 +111,6 @@ if __name__ == '__main__':
     # create_features(40)
     # create_bugs_comments(60)
     # create_features_comments(60)
+    create_blog_posts(40)
+    create_blog_post_comment(60)
     print("Filling done ")

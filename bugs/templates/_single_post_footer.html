@@ -9,48 +9,7 @@
     </div>
     <div class="col-sm-6 vote{% if user in item.voted_by.all %} voted{% endif %}">
         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-        {% if archive_name == 'bugs' %}
-            {% if item.author != user %}
-                <form method="post" action="/{{ archive_name }}/vote/{{ item.id }}/{% if not archive %}?next=/bugs/{{ item.id }}/{% endif %}">
-                    {% csrf_token %}
-                    <button type="submit">{{ item.total_votes }} votes</button>
-                </form>
-            {% else %}
-                {{ item.total_votes }} votes
-            {% endif %}
-
-        {% elif archive_name == 'features' %}
-            <button class="voteUp callCart">
-                {{ item.total_votes }} votes
-            </button>
-            <div class="popUpCart" style="display: none">
-                <div class="card">
-                    <div class="card-header">
-                        Vote for this feature
-                    </div>
-                    <div class="card-body">
-                        You are about to vote for this feature. To prioritise that feature you'll
-                        need to pay a fee €50. Click add to cart and then proceed to the checkout.
-                        <form action="{% url 'cart_add' item.id %}" method="post">
-                            {% csrf_token %}
-                            <ul class="nav">
-                                <li class="nav-item">
-                                    <button type="submit" class="btn btn-sm btn-success">
-                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        Add to cart
-                                    </button>
-                                </li>
-                                <li class="nav-item">
-                                    <button type="button" class="closePopUp btn btn-sm
-                            btn-danger">cancel
-                                    </button>
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
+        {{ item.total_votes }} votes
     </div>
     <div class="col-sm-6">
         <i class="fa fa-eye" aria-hidden="true"></i>
@@ -94,4 +53,48 @@
             </div>
         {% endif %}
     {% endif %}
+    <div class="col-12 text-center" style="margin-top: 15px">
+        {% if archive_name == 'bugs' and item.author != user %}
+            <form method="post"
+                  action="/{{ archive_name }}/vote/{{ item.id }}/{% if not archive %}?next=/bugs/{{ item.id }}/{% endif %}">
+                {% csrf_token %}
+                <button type="submit"
+                        class="btn btn-sm btn-success" style="display: block">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> click here to {% if user in item.voted_by.all %}un{% endif %}vote
+                </button>
+            </form>
+        {% elif archive_name == 'features' %}
+            <button class="btn btn-sm btn-success voteUp callCart" style="display: block">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                click here to vote
+            </button>
+            <div class="popUpCart" style="display: none">
+                <div class="card">
+                    <div class="card-header">
+                        Vote for this feature
+                    </div>
+                    <div class="card-body">
+                        You are about to vote for this feature. To prioritise that feature you'll
+                        need to pay a fee €50. Click add to cart and then proceed to the checkout.
+                        <form action="{% url 'cart_add' item.id %}" method="post">
+                            {% csrf_token %}
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <button type="submit" class="btn btn-sm btn-success">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        Add to cart
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button type="button" class="closePopUp btn btn-sm
+                            btn-danger">cancel
+                                    </button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 </footer>

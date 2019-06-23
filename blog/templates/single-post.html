@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="row align-items-center">
+            <h1 class="col-6">{{ item.name }}</h1>
+            <div class="col-6">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                {{ item.published|date:'d.m.Y' }}
+            </div>
+        </div>
+
+        <p>{{ item.description }}</p>
+        <section class="comments">
+            <h3 class="comments-title"><i class="fa fa-comment" aria-hidden="true"></i>
+                Comments ({{ comments|length }})</h3>
+            {% if comments|length %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <div class="row">
+                            <div class="col-3">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                {{ comment.author.username }}
+                            </div>
+                            <div class="col-9">
+                                {{ comment.comment }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if user.is_authenticated %}
+                {% crispy comments_form %}
+            {% else %}
+                <p class="alert alert-warning">
+                    To add new comment you need to <a href="{% url 'login' %}">login</a>
+                </p>
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}
