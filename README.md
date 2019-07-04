@@ -1,29 +1,32 @@
 [![Build Status](https://travis-ci.org/player64/Django-Issue-Tracker.svg?branch=master)](https://travis-ci.org/player64/Django-Issue-Tracker)
 
 # Django - Issue Tracker
-The app allows users to post report bugs and suggests new features. The users can create accounts posting the comments under bugs or features. There is a functionality to vote for the bugs, user can give only one vote for the bug only once. Voting for functionalities require a fee &euro;50 and is unlimited. The highest voted features will be developed and released in the next update. To inform users about the highest votes statistics page displaying charts in a common way. The administrator of the website could mark bugs/features as following statuses: to do, doing, done 
+The app allows users to post report bugs and suggests new features. The users can create an account to enable posting  comments under bugs or features. There is a functionality to vote for the bugs, users can vote for the bug only once. Voting for functionalities require a fee of €50, which enables unlimited votes. Features with the highest number of votes will be developed and released in the next update. To inform users about the highest votes statistics there is a page displaying charts. The administrator of the website can mark bugs/features as following statuses: to do, doing, done.
 
 ## UX
-The user needs to create an account to view/post feature or bug. After login, it redirects to profile page where user's bug & features are displayed. 
+The user needs to create an account to view/post features or bugs. After login to the app, the user is directed to  a profile page where users’ bugs & features are displayed.
 
 ### Statistic page
-Showing the statistics about features/bugs by status and most voted presented in charts
+This page shows the statistics of features/bugs by status and most voted presented in chart format.
 
 ### Bugs / Features pages
-It's displaying the recent bugs with brief information about the user, posted date, number of votes, number of votes. 
+This page displays reported bugs with brief information about the user, date posted and number of votes.
 
 ### Profile page
-It's displaying user's added bugs & features
+This page displays users’ added bugs and features.
+
+### Blog page
+This page shows the latest news
 
 ## Features
-* Registration user can create the account and view/post features & bugs
-* Users can't delete someone bug/feature or edit
-* Prevention of voting on own posted bug
-* Views are counted only once when user enter the recipe view is incremented if refresh the page it isn't counted this is done by session to prevent the collection of fake data 
-* User can vote for the feature by paying &euro;50 for a vote  there is no limit to add multiple times
-* Profile page is displaying the user's posted bugs & features
-* Content on the website has been added by python Faker
-* Project is using webpack for compiling scss files to css ES6 scripts to ES5 it got implemented reloading when files changed.
+* Registered users can create the account and view/post about features & bugs.
+* Users can't delete another user’s bug/feature or edit.
+* Prevention of voting on a user’s own posted bug.
+* Views are counted only once when users enter the recipe view - - if the page is refreshed it isn't counted.  This is done by session to prevent the collection of fake data.
+* Users can vote for the feature by paying €50 for a vote; there is no limit to add multiple times.
+* The profile page displays the user's posted bugs & features.
+* Content on the website has been added by Python Faker.
+* The project is using webpack for compiling scss files to css and ES6 scripts to ES5
 
 ## Features to implement
 * Add pagination for bugs/feature
@@ -54,8 +57,7 @@ It's displaying user's added bugs & features
 * Webpack loader
  
  ## Testing
-* All the methods are covered at least in 70% by written unit tests
-* Form unit test is written to check forms validation
+* The app was developed by using Test Driven Development paradigm
 * The website has been tested on various screen sizes
 
 ## Deployment
